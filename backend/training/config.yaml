@@ -1,0 +1,46 @@
+dataset:
+  name: PlantVillage
+  source: kagglehub  # or huggingface
+  num_classes: 38
+  image_size: 224
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+model:
+  architecture: efficientnet_b0
+  pretrained: true
+  dropout: 0.2
+
+training:
+  stage1_epochs: 5
+  stage1_lr: 0.001
+  stage2_epochs: 20
+  stage2_lr_backbone: 0.00001
+  stage2_lr_head: 0.0001
+  batch_size: 32
+  num_workers: 4
+  weight_decay: 0.01
+  early_stopping_patience: 5
+  seed: 42
+
+augmentation:
+  horizontal_flip: 0.5
+  rotation_degrees: 15
+  random_crop_scale: [0.8, 1.0]
+  color_jitter:
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.1
+
+calibration:
+  temperature_lr: 0.01
+  temperature_max_iter: 50
+
+ood:
+  energy_temperature: 1.0
+  id_percentile: 95.0
+
+confidence:
+  high_threshold: 0.85
+  low_threshold: 0.60

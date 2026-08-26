@@ -1,0 +1,34 @@
+[
+  {
+    "model": "EfficientNet-B0 (Selected)",
+    "accuracy": 0.978,
+    "macro_f1": 0.975,
+    "mean_latency_ms": 14.7,
+    "model_size_mb": 15.5,
+    "is_selected": true
+  },
+  {
+    "model": "ResNet-50",
+    "accuracy": 0.974,
+    "macro_f1": 0.971,
+    "mean_latency_ms": 78.4,
+    "model_size_mb": 97.8,
+    "is_selected": false
+  },
+  {
+    "model": "ConvNeXt-Tiny",
+    "accuracy": 0.981,
+    "macro_f1": 0.978,
+    "mean_latency_ms": 84.2,
+    "model_size_mb": 114.2,
+    "is_selected": false
+  },
+  {
+    "model": "MobileNet-V3-Small",
+    "accuracy": 0.952,
+    "macro_f1": 0.948,
+    "mean_latency_ms": 14.2,
+    "model_size_mb": 9.8,
+    "is_selected": false
+  }
+]

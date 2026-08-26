@@ -1,0 +1,9 @@
+{
+  "thresholds": [
+    {"max_percent": 5.0, "label": "minimal", "description": "Negligible disease presence"},
+    {"max_percent": 25.0, "label": "mild", "description": "Early-stage infection"},
+    {"max_percent": 50.0, "label": "moderate", "description": "Significant infection spread"},
+    {"max_percent": 100.0, "label": "severe", "description": "Advanced disease state"}
+  ],
+  "note": "Thresholds based on general phytopathology guidelines. Not universally calibrated for all diseases."
+}

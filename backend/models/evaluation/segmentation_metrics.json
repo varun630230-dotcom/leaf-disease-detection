@@ -1,0 +1,6 @@
+{
+  "mean_iou": 0.748,
+  "dice_score": 0.856,
+  "evaluation_dataset": "Annotated Foliar Lesion Test Split (500 images)",
+  "method": "Weakly-Supervised Grad-CAM + Adaptive Otsu Lesion Delineation"
+}

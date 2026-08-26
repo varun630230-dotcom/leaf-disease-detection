@@ -1,0 +1,9 @@
+{
+  "version": "leafguard-v1.0",
+  "architecture": "EfficientNetB0",
+  "num_classes": 38,
+  "image_size": 224,
+  "dataset": "PlantVillage",
+  "status": "not_trained",
+  "created_at": null
+}

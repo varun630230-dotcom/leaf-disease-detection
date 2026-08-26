@@ -1,0 +1,8 @@
+{
+  "auroc": 0.984,
+  "fpr_at_95tpr": 0.038,
+  "rejection_rate": 0.965,
+  "energy_threshold": -8.45,
+  "temperature": 1.0,
+  "evaluation_dataset": "PlantVillage In-Dist + COCO/Non-Leaf OOD Test (500 non-leaf samples)"
+}
