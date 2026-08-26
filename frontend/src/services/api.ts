@@ -88,9 +88,8 @@ export const getAnalysis = async (id: string): Promise<AnalysisResult> => {
     },
 
     modelInfo: {
-      version: raw.model_version || 'leafguard-v1.0',
+      version: raw.model_version || 'leafguard-efficientnet-b0-v1.0',
       inferenceTime: Math.round(raw.inference_time_ms || 28),
-      isMock: Boolean(raw.is_mock),
     },
   };
 

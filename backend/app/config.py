@@ -65,6 +65,10 @@ class Settings(BaseSettings):
         return path
 
     @property
+    def RESULTS_DIR(self) -> Path:
+        return self.results_path
+
+    @property
     def models_path(self) -> Path:
         return self.base_dir / self.models_dir
 

@@ -56,6 +56,5 @@ class AnalysisResponse(BaseModel):
 
     # Execution Metadata
     model_version: Optional[str] = None
-    is_mock: Optional[bool] = None
     inference_time_ms: Optional[float] = None
     timings: Optional[dict[str, float]] = None

@@ -21,7 +21,6 @@ export interface AnalysisImages {
 export interface ModelInfo {
   version: string;
   inferenceTime: number;
-  isMock?: boolean;
 }
 
 export interface AnalysisResult {

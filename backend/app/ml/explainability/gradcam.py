@@ -1,4 +1,4 @@
-"""LeafGuard AI — Grad-CAM Explainable AI Visualization."""
+"""LeafGuard AI — Genuine Grad-CAM Explainable AI Module."""
 
 import logging
 from dataclasses import dataclass
@@ -22,16 +22,23 @@ class GradCAMResult:
 
 
 class GradCAMExplainer:
-    """Computes Gradient-Weighted Class Activation Maps (Grad-CAM)."""
+    """Computes genuine Gradient-Weighted Class Activation Maps (Grad-CAM) from the deep network."""
 
     def __init__(self, model: Optional[nn.Module] = None, target_layer: Optional[nn.Module] = None):
         self.model = model
-        self.target_layer = target_layer
+        self.target_layer = target_layer or (model.features[-1] if model is not None and hasattr(model, "features") else None)
         self.gradients = None
         self.activations = None
         self.handles = []
 
         if self.model is not None and self.target_layer is not None:
+            self._register_hooks()
+
+    def set_model(self, model: nn.Module):
+        self.cleanup()
+        self.model = model
+        self.target_layer = model.features[-1] if hasattr(model, "features") else None
+        if self.target_layer is not None:
             self._register_hooks()
 
     def _register_hooks(self):
@@ -44,31 +51,6 @@ class GradCAMExplainer:
         self.handles.append(self.target_layer.register_forward_hook(forward_hook))
         self.handles.append(self.target_layer.register_full_backward_hook(backward_hook))
 
-    def _generate_synthetic_saliency(self, raw_numpy: np.ndarray, target_class_idx: int) -> np.ndarray:
-        h, w = raw_numpy.shape[:2]
-        rgb_uint8 = np.uint8(raw_numpy * 255)
-        hsv = cv2.cvtColor(rgb_uint8, cv2.COLOR_RGB2HSV)
-
-        # Lesion features
-        brown_yellow = cv2.inRange(hsv, (5, 30, 20), (25, 255, 220))
-        gray = cv2.cvtColor(rgb_uint8, cv2.COLOR_RGB2GRAY)
-        dark_spots = cv2.inRange(gray, 0, 75)
-        spots = brown_yellow | dark_spots
-
-        if np.count_nonzero(spots) > 80:
-            heatmap_raw = cv2.GaussianBlur(np.float32(spots), (31, 31), 0)
-        else:
-            green = cv2.inRange(hsv, (20, 30, 30), (85, 255, 255))
-            heatmap_raw = cv2.GaussianBlur(np.float32(green), (45, 45), 0)
-
-        max_val = np.max(heatmap_raw)
-        if max_val > 0:
-            heatmap = heatmap_raw / max_val
-        else:
-            heatmap = np.zeros((h, w), dtype=np.float32)
-
-        return heatmap
-
     def generate_explanation(
         self,
         tensor: torch.Tensor,
@@ -78,64 +60,76 @@ class GradCAMExplainer:
         prefix: str = "gradcam",
         alpha: float = 0.5,
     ) -> Optional[GradCAMResult]:
+        """Calculates real Grad-CAM attention heatmap for target class."""
+        if self.model is None or self.target_layer is None:
+            logger.warning("GradCAM model or target layer not initialized.")
+            return None
+
         h, w = raw_numpy.shape[:2]
 
-        if self.model is not None and self.target_layer is not None:
-            try:
-                self.model.eval()
-                tensor = tensor.requires_grad_(True)
-                logits = self.model(tensor)
+        try:
+            self.model.eval()
+            input_tensor = tensor.clone().detach().requires_grad_(True)
+            logits = self.model(input_tensor)
 
-                self.model.zero_grad()
-                score = logits[0, target_class_idx]
-                score.backward(retain_graph=True)
+            self.model.zero_grad()
+            score = logits[0, target_class_idx]
+            score.backward()
 
-                if self.gradients is not None and self.activations is not None:
-                    weights = torch.mean(self.gradients, dim=(2, 3), keepdim=True)
-                    cam = torch.sum(weights * self.activations, dim=1, keepdim=True)
-                    cam = torch.clamp(cam, min=0)
-                    cam = cam.squeeze().cpu().numpy()
+            if self.gradients is not None and self.activations is not None:
+                # Global average pooling of gradients -> weights alpha_k
+                weights = torch.mean(self.gradients, dim=(2, 3), keepdim=True)
+                cam = torch.sum(weights * self.activations, dim=1, keepdim=True)
+                cam = torch.clamp(cam, min=0)  # ReLU
+                cam_np = cam.squeeze().cpu().numpy()
 
-                    cam_resized = cv2.resize(cam, (w, h))
-                    max_val = np.max(cam_resized)
-                    heatmap = cam_resized / max_val if max_val > 0 else np.zeros((h, w), dtype=np.float32)
+                cam_resized = cv2.resize(cam_np, (w, h))
+                max_val = np.max(cam_resized)
+                min_val = np.min(cam_resized)
+                if max_val > min_val:
+                    heatmap = (cam_resized - min_val) / (max_val - min_val)
                 else:
-                    heatmap = self._generate_synthetic_saliency(raw_numpy, target_class_idx)
-            except Exception as e:
-                logger.warning(f"Grad-CAM generation failed: {e}. Using botanical saliency fallback.")
-                heatmap = self._generate_synthetic_saliency(raw_numpy, target_class_idx)
-        else:
-            heatmap = self._generate_synthetic_saliency(raw_numpy, target_class_idx)
+                    heatmap = np.zeros((h, w), dtype=np.float32)
+            else:
+                logger.error("Gradients or activations not captured by hooks.")
+                return None
 
-        # Generate JET colormap overlay
-        heatmap_uint8 = np.uint8(heatmap * 255)
-        colormap = cv2.applyColorMap(heatmap_uint8, cv2.COLORMAP_JET)
-        colormap_rgb = cv2.cvtColor(colormap, cv2.COLOR_BGR2RGB)
+            # Colorize heatmap with JET colormap
+            heatmap_uint8 = np.uint8(heatmap * 255)
+            colormap = cv2.applyColorMap(heatmap_uint8, cv2.COLORMAP_JET)
+            colormap_rgb = cv2.cvtColor(colormap, cv2.COLOR_BGR2RGB)
 
-        rgb_uint8 = np.uint8(raw_numpy * 255)
-        overlay = cv2.addWeighted(rgb_uint8, 1 - alpha, colormap_rgb, alpha, 0)
+            rgb_uint8 = np.uint8(raw_numpy * 255)
+            overlay = cv2.addWeighted(rgb_uint8, 1 - alpha, colormap_rgb, alpha, 0)
 
-        heatmap_path = None
-        overlay_path = None
+            heatmap_path = None
+            overlay_path = None
 
-        if save_dir is not None:
-            save_path = Path(save_dir)
-            save_path.mkdir(parents=True, exist_ok=True)
+            if save_dir is not None:
+                save_path = Path(save_dir)
+                save_path.mkdir(parents=True, exist_ok=True)
 
-            heatmap_path = str(save_path / f"{prefix}_heatmap.png")
-            overlay_path = str(save_path / f"{prefix}_overlay.png")
+                heatmap_path = str(save_path / f"{prefix}_heatmap.png")
+                overlay_path = str(save_path / f"{prefix}_overlay.png")
 
-            cv2.imwrite(heatmap_path, heatmap_uint8)
-            cv2.imwrite(overlay_path, cv2.cvtColor(overlay, cv2.COLOR_RGB2BGR))
+                cv2.imwrite(heatmap_path, heatmap_uint8)
+                cv2.imwrite(overlay_path, cv2.cvtColor(overlay, cv2.COLOR_RGB2BGR))
 
-        return GradCAMResult(
-            heatmap=heatmap,
-            overlay=overlay,
-            heatmap_path=heatmap_path,
-            overlay_path=overlay_path,
-        )
+            return GradCAMResult(
+                heatmap=heatmap,
+                overlay=overlay,
+                heatmap_path=heatmap_path,
+                overlay_path=overlay_path,
+            )
+
+        except Exception as e:
+            logger.error(f"Grad-CAM generation error: {e}", exc_info=True)
+            return None
 
     def cleanup(self):
         for handle in self.handles:
-            handle.remove()
+            try:
+                handle.remove()
+            except Exception:
+                pass
         self.handles.clear()
