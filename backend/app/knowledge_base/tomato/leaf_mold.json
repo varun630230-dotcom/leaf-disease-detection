@@ -1,0 +1,24 @@
+{
+  "plant": "Tomato",
+  "disease": "Leaf Mold",
+  "class_name": "Tomato___Leaf_Mold",
+  "disease_type": "fungal",
+  "pathogen": "Passalora fulva (syn. Cladosporium fulvum)",
+  "symptoms": [
+    "Pale green to yellowish diffuse spots on upper leaf surfaces",
+    "Dense olive-green to brown velvety fungal mold on leaf undersides",
+    "Leaves curl, wilt, and drop prematurely in high tunnel environments"
+  ],
+  "risk_factors": [
+    "High relative humidity (>85%) in greenhouses or poly-tunnels",
+    "Warm temperatures (21-24\u00b0C) with stagnant air"
+  ],
+  "prevention": [
+    "Ventilate greenhouses and use circulation fans to keep humidity <85%",
+    "Select leaf-mold resistant tomato hybrids (Cf gene resistance)"
+  ],
+  "recommended_actions": [
+    "Increase exhaust ventilation immediately to lower ambient moisture",
+    "Apply potassium bicarbonate or bio-fungicide on leaf undersides"
+  ]
+}

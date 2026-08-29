@@ -1,0 +1,23 @@
+{
+  "plant": "Potato",
+  "disease": "Early Blight",
+  "class_name": "Potato___Early_blight",
+  "disease_type": "fungal",
+  "pathogen": "Alternaria solani",
+  "symptoms": [
+    "Dark brown circular spots with distinctive concentric rings",
+    "Yellow halo around mature spots on lower older foliage",
+    "Dry, leathery dark brown spots on potato tuber skins"
+  ],
+  "risk_factors": [
+    "Warm days with high humidity and alternating dry periods",
+    "Nitrogen deficiency or aging plant tissue"
+  ],
+  "prevention": [
+    "Maintain balanced crop nutrition (especially nitrogen and potassium)",
+    "Avoid overhead irrigation in late afternoon"
+  ],
+  "recommended_actions": [
+    "Apply protectant fungicides (chlorothalonil/mancozeb) upon early symptom detection"
+  ]
+}

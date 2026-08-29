@@ -1,6 +1,15 @@
 /** TypeScript Type Definitions for LeafGuard AI. */
 
-export type AnalysisStatus = 'processing' | 'success' | 'rejected' | 'uncertain' | 'error';
+export type AnalysisStatus =
+  | 'processing'
+  | 'success'
+  | 'healthy'
+  | 'unknown'
+  | 'rejected'
+  | 'uncertain'
+  | 'error'
+  | 'model_unavailable';
+
 export type SeverityLevel = 'MINIMAL' | 'MILD' | 'MODERATE' | 'SEVERE';
 export type ConfidenceLevel = 'HIGH' | 'MEDIUM' | 'LOW';
 
@@ -23,6 +32,18 @@ export interface ModelInfo {
   inferenceTime: number;
 }
 
+export interface DiseaseKnowledge {
+  plant: string;
+  disease: string;
+  className: string;
+  diseaseType: 'fungal' | 'bacterial' | 'viral' | 'pest_mite' | string;
+  pathogen: string;
+  symptoms: string[];
+  riskFactors: string[];
+  prevention: string[];
+  recommendedActions: string[];
+}
+
 export interface AnalysisResult {
   id: string;
   status: AnalysisStatus;
@@ -32,6 +53,7 @@ export interface AnalysisResult {
   // Plant & Condition
   plant?: string;
   disease?: string;
+  diseaseType?: string;
   isDiseased?: boolean;
 
   // Severity & Area
@@ -49,6 +71,9 @@ export interface AnalysisResult {
 
   // Concise Explanation
   visualAnalysis?: string;
+
+  // Verified Agronomic Knowledge
+  knowledge?: DiseaseKnowledge;
 
   // Top Predictions
   topPredictions?: TopPrediction[];

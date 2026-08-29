@@ -5,6 +5,7 @@ import {
   SeverityLevel,
   PerformanceData,
   ClassPerformance,
+  DiseaseKnowledge,
 } from '../types';
 
 const API_BASE = '/api';
@@ -48,6 +49,21 @@ export const getAnalysis = async (id: string): Promise<AnalysisResult> => {
   const confLevel = (raw.confidence_state || 'HIGH').toUpperCase() as ConfidenceLevel;
   const severityVal = raw.severity ? (raw.severity.toUpperCase() as SeverityLevel) : undefined;
 
+  let parsedKnowledge: DiseaseKnowledge | undefined = undefined;
+  if (raw.knowledge) {
+    parsedKnowledge = {
+      plant: raw.knowledge.plant,
+      disease: raw.knowledge.disease,
+      className: raw.knowledge.class_name,
+      diseaseType: raw.knowledge.disease_type || 'fungal',
+      pathogen: raw.knowledge.pathogen || 'Verified Biological Pathogen',
+      symptoms: raw.knowledge.symptoms || [],
+      riskFactors: raw.knowledge.risk_factors || [],
+      prevention: raw.knowledge.prevention || [],
+      recommendedActions: raw.knowledge.recommended_actions || [],
+    };
+  }
+
   const result: AnalysisResult = {
     id: raw.id,
     status: (raw.status || 'success') as AnalysisStatus,
@@ -55,7 +71,8 @@ export const getAnalysis = async (id: string): Promise<AnalysisResult> => {
     message: raw.message,
 
     plant: raw.plant,
-    disease: raw.disease || (isDiseased ? 'Diseased' : 'Healthy'),
+    disease: raw.disease || (isDiseased ? 'Condition Detected' : 'Healthy'),
+    diseaseType: raw.disease_type,
     isDiseased: isDiseased,
 
     severity: severityVal,
@@ -72,6 +89,7 @@ export const getAnalysis = async (id: string): Promise<AnalysisResult> => {
     gradcamAvailable: Boolean(raw.gradcam_available),
 
     visualAnalysis: raw.visual_analysis,
+    knowledge: parsedKnowledge,
 
     topPredictions: (raw.top_predictions || []).map((p: any) => ({
       plant: p.plant || 'Plant',
@@ -88,7 +106,7 @@ export const getAnalysis = async (id: string): Promise<AnalysisResult> => {
     },
 
     modelInfo: {
-      version: raw.model_version || 'leafguard-efficientnet-b0-v1.0',
+      version: raw.model_version || 'leafguard-efficientnet-b0-v2.0',
       inferenceTime: Math.round(raw.inference_time_ms || 28),
     },
   };
@@ -107,7 +125,6 @@ export const getPerformance = async (): Promise<PerformanceData> => {
     return { status: 'not_evaluated' };
   }
 
-  // Parse per-class metrics
   const perClassList: ClassPerformance[] = [];
   if (raw.per_class) {
     for (const [key, val] of Object.entries<any>(raw.per_class)) {
@@ -170,7 +187,7 @@ export const getPerformance = async (): Promise<PerformanceData> => {
         }))
       : undefined,
     confusionMatrixUrl: raw.confusion_matrix_url || `${API_BASE}/performance/confusion-matrix`,
-    modelVersion: raw.model_info?.version || 'leafguard-v1.0',
+    modelVersion: raw.model_info?.version || 'leafguard-efficientnet-b0-v2.0',
     limitations: raw.limitations,
   };
 };

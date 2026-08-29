@@ -1,0 +1,22 @@
+{
+  "plant": "Corn",
+  "disease": "Common Rust",
+  "class_name": "Corn_(maize)___Common_rust_",
+  "disease_type": "fungal",
+  "pathogen": "Puccinia sorghi",
+  "symptoms": [
+    "Oval to elongate cinnamon-brown powdery pustules on both leaf surfaces",
+    "Pustules erupt through epidermis releasing reddish-brown urediniospores",
+    "Pustules turn blackish-brown later in the season"
+  ],
+  "risk_factors": [
+    "Cool to moderate temperatures (16-24\u00b0C) with high relative humidity",
+    "Windborne spores carried north from southern growing regions"
+  ],
+  "prevention": [
+    "Plant rust-resistant corn hybrids (Rp-gene resistance)"
+  ],
+  "recommended_actions": [
+    "Fungicide treatment is rarely required unless high rust pressure hits before tasseling"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "plant": "Apple",
+  "disease": "Cedar Apple Rust",
+  "class_name": "Apple___Cedar_apple_rust",
+  "disease_type": "fungal",
+  "pathogen": "Gymnosporangium juniperi-virginianae",
+  "symptoms": [
+    "Bright yellow-orange circular spots with red borders on upper leaf surface",
+    "Small black fungal dots (pycnia) within the orange spots",
+    "Cluster cups (aecia) with tube-like protrusions on underside of leaves"
+  ],
+  "risk_factors": [
+    "Presence of alternate host (Eastern Red Cedar / Juniper) within 1-2 km",
+    "Wet spring weather when cedar galls release orange gelatinous spore horns"
+  ],
+  "prevention": [
+    "Remove nearby ornamental junipers and red cedars if feasible",
+    "Plant resistant apple varieties (e.g. Redfree, Liberty, Freedom)"
+  ],
+  "recommended_actions": [
+    "Apply myclobutanil or sulfur sprays in early spring during cedar spore release"
+  ]
+}

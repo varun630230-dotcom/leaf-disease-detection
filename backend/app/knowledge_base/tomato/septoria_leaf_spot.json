@@ -1,0 +1,25 @@
+{
+  "plant": "Tomato",
+  "disease": "Septoria Leaf Spot",
+  "class_name": "Tomato___Septoria_leaf_spot",
+  "disease_type": "fungal",
+  "pathogen": "Septoria lycopersici",
+  "symptoms": [
+    "Numerous small circular spots (2-4 mm) with dark margins and gray/tan centers",
+    "Tiny black specks (pycnidia fruiting bodies) visible in lesion centers with a hand lens",
+    "Leaves turn yellow, wither, and fall off progressing from bottom upward"
+  ],
+  "risk_factors": [
+    "Moderate temperatures (20-25\u00b0C) with persistent wet foliage",
+    "Overcrowded planting beds with poor air circulation"
+  ],
+  "prevention": [
+    "Mulch soil to eliminate fungal spore rain splash",
+    "Rotate crops annually to non-solanaceous families",
+    "Clean all stakes and cages at the end of each growing season"
+  ],
+  "recommended_actions": [
+    "Prune infected bottom leaves as soon as circular gray spots appear",
+    "Apply protective chlorothalonil or copper-based fungicides"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "plant": "Tomato",
+  "disease": "Early Blight",
+  "class_name": "Tomato___Early_blight",
+  "disease_type": "fungal",
+  "pathogen": "Alternaria solani & Alternaria linariae",
+  "symptoms": [
+    "Characteristic concentric ring 'target board' dark brown lesions",
+    "Yellow chlorotic halos surrounding older lower leaf spots",
+    "Progressive upward defoliation from lower canopy to upper foliage",
+    "Collar rot lesions at base of stem near soil level"
+  ],
+  "risk_factors": [
+    "Warm temperatures (24-29\u00b0C) alternating with wet and dry cycles",
+    "Heavy morning dews and soil splash during rain events",
+    "Plant stress from heavy fruit load or nutrient deficiency"
+  ],
+  "prevention": [
+    "Apply organic mulch around plant base to prevent soil splash",
+    "Prune lower foliage (bottom 30 cm) once plants reach 1 meter",
+    "Stake or trellis vines upright for enhanced airflow"
+  ],
+  "recommended_actions": [
+    "Remove lower infected foliage at the first sign of target spots",
+    "Apply bio-fungicides or copper sulfate sprays on a 7-10 day interval during wet weather"
+  ]
+}

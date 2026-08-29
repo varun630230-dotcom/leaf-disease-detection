@@ -1,0 +1,24 @@
+{
+  "plant": "Corn",
+  "disease": "Gray Leaf Spot",
+  "class_name": "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+  "disease_type": "fungal",
+  "pathogen": "Cercospora zeae-maydis",
+  "symptoms": [
+    "Narrow, rectangular tan to gray lesions strictly bounded by leaf veins",
+    "Lesions merge to blight entire leaves under high disease pressure",
+    "Premature stalk lodging and reduced grain fill"
+  ],
+  "risk_factors": [
+    "Continuous corn cultivation with heavy surface crop residue",
+    "Warm, humid weather (24-30\u00b0C) with persistent fog or dew"
+  ],
+  "prevention": [
+    "Plant resistant corn hybrids with high GLS disease ratings",
+    "Rotate fields out of corn for at least 1-2 seasons",
+    "Tillage to bury infected corn residue where soil conservation allows"
+  ],
+  "recommended_actions": [
+    "Apply foliar strobilurin or triazole fungicides between VT (tasseling) and R2 stage"
+  ]
+}

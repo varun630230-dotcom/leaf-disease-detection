@@ -1,0 +1,23 @@
+{
+  "plant": "Grape",
+  "disease": "Black Rot",
+  "class_name": "Grape___Black_rot",
+  "disease_type": "fungal",
+  "pathogen": "Guignardia bidwellii",
+  "symptoms": [
+    "Small reddish-brown circular spots with dark borders on leaves",
+    "Tiny black pycnidia pimples forming inside leaf spots",
+    "Infected grape berries shrivel into hard, black, wrinkled mummies"
+  ],
+  "risk_factors": [
+    "Warm, humid weather with frequent rain during spring shoot growth",
+    "Mummified grapes remaining on the vine from the previous season"
+  ],
+  "prevention": [
+    "Remove and destroy all dried mummified berry clusters during dormant pruning",
+    "Trellis vines to maintain open canopy and rapid drying after dew"
+  ],
+  "recommended_actions": [
+    "Apply protective mancozeb, captan, or copper sprays from bud break through veraison"
+  ]
+}

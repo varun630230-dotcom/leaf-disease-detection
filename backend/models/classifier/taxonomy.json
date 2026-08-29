@@ -1,0 +1,403 @@
+{
+  "version": "1.0.0",
+  "taxonomy_source": "PlantVillage & International Crop Protection Standards",
+  "total_classes": 38,
+  "crops": [
+    "Apple",
+    "Blueberry",
+    "Cherry",
+    "Corn",
+    "Grape",
+    "Orange",
+    "Peach",
+    "Pepper",
+    "Potato",
+    "Raspberry",
+    "Soybean",
+    "Squash",
+    "Strawberry",
+    "Tomato"
+  ],
+  "classes": [
+    {
+      "class_index": 0,
+      "class_name": "Apple___Apple_scab",
+      "plant": "Apple",
+      "disease": "Apple Scab",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Venturia inaequalis",
+      "synonyms": ["Apple Scab", "Black Spot of Apple"]
+    },
+    {
+      "class_index": 1,
+      "class_name": "Apple___Black_rot",
+      "plant": "Apple",
+      "disease": "Black Rot",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Botryosphaeria obtusa",
+      "synonyms": ["Apple Black Rot", "Frogeye Leaf Spot"]
+    },
+    {
+      "class_index": 2,
+      "class_name": "Apple___Cedar_apple_rust",
+      "plant": "Apple",
+      "disease": "Cedar Apple Rust",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Gymnosporangium juniperi-virginianae",
+      "synonyms": ["Cedar Apple Rust", "Apple Rust"]
+    },
+    {
+      "class_index": 3,
+      "class_name": "Apple___healthy",
+      "plant": "Apple",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Apple Foliage"]
+    },
+    {
+      "class_index": 4,
+      "class_name": "Blueberry___healthy",
+      "plant": "Blueberry",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Blueberry Foliage"]
+    },
+    {
+      "class_index": 5,
+      "class_name": "Cherry_(including_sour)___Powdery_mildew",
+      "plant": "Cherry",
+      "disease": "Powdery Mildew",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Podosphaera clandestina",
+      "synonyms": ["Cherry Powdery Mildew"]
+    },
+    {
+      "class_index": 6,
+      "class_name": "Cherry_(including_sour)___healthy",
+      "plant": "Cherry",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Cherry Foliage"]
+    },
+    {
+      "class_index": 7,
+      "class_name": "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+      "plant": "Corn",
+      "disease": "Gray Leaf Spot",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Cercospora zeae-maydis",
+      "synonyms": ["Corn Gray Leaf Spot", "Cercospora Leaf Spot of Maize"]
+    },
+    {
+      "class_index": 8,
+      "class_name": "Corn_(maize)___Common_rust_",
+      "plant": "Corn",
+      "disease": "Common Rust",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Puccinia sorghi",
+      "synonyms": ["Corn Common Rust", "Maize Rust"]
+    },
+    {
+      "class_index": 9,
+      "class_name": "Corn_(maize)___Northern_Leaf_Blight",
+      "plant": "Corn",
+      "disease": "Northern Leaf Blight",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Exserohilum turcicum",
+      "synonyms": ["Northern Corn Leaf Blight", "Turcicum Leaf Blight"]
+    },
+    {
+      "class_index": 10,
+      "class_name": "Corn_(maize)___healthy",
+      "plant": "Corn",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Corn Foliage"]
+    },
+    {
+      "class_index": 11,
+      "class_name": "Grape___Black_rot",
+      "plant": "Grape",
+      "disease": "Black Rot",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Guignardia bidwellii",
+      "synonyms": ["Grape Black Rot"]
+    },
+    {
+      "class_index": 12,
+      "class_name": "Grape___Esca_(Black_Measles)",
+      "plant": "Grape",
+      "disease": "Esca (Black Measles)",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Phaeomoniella chlamydospora & Phaeoacremonium aleophilum",
+      "synonyms": ["Grape Esca", "Black Measles", "Grapevine Trunk Disease"]
+    },
+    {
+      "class_index": 13,
+      "class_name": "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
+      "plant": "Grape",
+      "disease": "Leaf Blight (Isariopsis Leaf Spot)",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Pseudocercospora cladosporioides",
+      "synonyms": ["Grape Leaf Blight", "Isariopsis Leaf Spot", "Grape Anthracnose Blight"]
+    },
+    {
+      "class_index": 14,
+      "class_name": "Grape___healthy",
+      "plant": "Grape",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Grapevine Foliage"]
+    },
+    {
+      "class_index": 15,
+      "class_name": "Orange___Haunglongbing_(Citrus_greening)",
+      "plant": "Orange",
+      "disease": "Citrus Greening (Huanglongbing)",
+      "is_healthy": false,
+      "disease_type": "bacterial",
+      "pathogen": "Candidatus Liberibacter asiaticus",
+      "synonyms": ["Citrus Greening", "Huanglongbing", "HLB"]
+    },
+    {
+      "class_index": 16,
+      "class_name": "Peach___Bacterial_spot",
+      "plant": "Peach",
+      "disease": "Bacterial Spot",
+      "is_healthy": false,
+      "disease_type": "bacterial",
+      "pathogen": "Xanthomonas arboricola pv. pruni",
+      "synonyms": ["Peach Bacterial Spot", "Bacterial Shot Hole"]
+    },
+    {
+      "class_index": 17,
+      "class_name": "Peach___healthy",
+      "plant": "Peach",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Peach Foliage"]
+    },
+    {
+      "class_index": 18,
+      "class_name": "Pepper,_bell___Bacterial_spot",
+      "plant": "Pepper",
+      "disease": "Bacterial Spot",
+      "is_healthy": false,
+      "disease_type": "bacterial",
+      "pathogen": "Xanthomonas campestris pv. vesicatoria",
+      "synonyms": ["Pepper Bacterial Spot", "Bell Pepper Leaf Spot"]
+    },
+    {
+      "class_index": 19,
+      "class_name": "Pepper,_bell___healthy",
+      "plant": "Pepper",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Pepper Foliage"]
+    },
+    {
+      "class_index": 20,
+      "class_name": "Potato___Early_blight",
+      "plant": "Potato",
+      "disease": "Early Blight",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Alternaria solani",
+      "synonyms": ["Potato Early Blight", "Target Spot of Potato"]
+    },
+    {
+      "class_index": 21,
+      "class_name": "Potato___Late_blight",
+      "plant": "Potato",
+      "disease": "Late Blight",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Phytophthora infestans",
+      "synonyms": ["Potato Late Blight", "Potato Blight"]
+    },
+    {
+      "class_index": 22,
+      "class_name": "Potato___healthy",
+      "plant": "Potato",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Potato Foliage"]
+    },
+    {
+      "class_index": 23,
+      "class_name": "Raspberry___healthy",
+      "plant": "Raspberry",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Raspberry Foliage"]
+    },
+    {
+      "class_index": 24,
+      "class_name": "Soybean___healthy",
+      "plant": "Soybean",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Soybean Foliage"]
+    },
+    {
+      "class_index": 25,
+      "class_name": "Squash___Powdery_mildew",
+      "plant": "Squash",
+      "disease": "Powdery Mildew",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Podosphaera xanthii",
+      "synonyms": ["Squash Powdery Mildew", "Cucurbit Mildew"]
+    },
+    {
+      "class_index": 26,
+      "class_name": "Strawberry___Leaf_scorch",
+      "plant": "Strawberry",
+      "disease": "Leaf Scorch",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Diplocarpon earlianum",
+      "synonyms": ["Strawberry Leaf Scorch"]
+    },
+    {
+      "class_index": 27,
+      "class_name": "Strawberry___healthy",
+      "plant": "Strawberry",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Strawberry Foliage"]
+    },
+    {
+      "class_index": 28,
+      "class_name": "Tomato___Bacterial_spot",
+      "plant": "Tomato",
+      "disease": "Bacterial Spot",
+      "is_healthy": false,
+      "disease_type": "bacterial",
+      "pathogen": "Xanthomonas perforans",
+      "synonyms": ["Tomato Bacterial Spot", "Bacterial Leaf Spot"]
+    },
+    {
+      "class_index": 29,
+      "class_name": "Tomato___Early_blight",
+      "plant": "Tomato",
+      "disease": "Early Blight",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Alternaria linariae & Alternaria solani",
+      "synonyms": ["Tomato Early Blight", "Alternaria Leaf Spot"]
+    },
+    {
+      "class_index": 30,
+      "class_name": "Tomato___Late_blight",
+      "plant": "Tomato",
+      "disease": "Late Blight",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Phytophthora infestans",
+      "synonyms": ["Tomato Late Blight", "Phytophthora Blight"]
+    },
+    {
+      "class_index": 31,
+      "class_name": "Tomato___Leaf_Mold",
+      "plant": "Tomato",
+      "disease": "Leaf Mold",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Passalora fulva (syn. Cladosporium fulvum)",
+      "synonyms": ["Tomato Leaf Mold", "Cladosporium Mold"]
+    },
+    {
+      "class_index": 32,
+      "class_name": "Tomato___Septoria_leaf_spot",
+      "plant": "Tomato",
+      "disease": "Septoria Leaf Spot",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Septoria lycopersici",
+      "synonyms": ["Tomato Septoria", "Septoria Blight"]
+    },
+    {
+      "class_index": 33,
+      "class_name": "Tomato___Spider_mites Two-spotted_spider_mite",
+      "plant": "Tomato",
+      "disease": "Spider Mites (Two-Spotted)",
+      "is_healthy": false,
+      "disease_type": "pest_mite",
+      "pathogen": "Tetranychus urticae",
+      "synonyms": ["Two-Spotted Spider Mite", "Spider Mite Foliar Damage"]
+    },
+    {
+      "class_index": 34,
+      "class_name": "Tomato___Target_Spot",
+      "plant": "Tomato",
+      "disease": "Target Spot",
+      "is_healthy": false,
+      "disease_type": "fungal",
+      "pathogen": "Corynespora cassiicola",
+      "synonyms": ["Tomato Target Spot", "Corynespora Leaf Spot"]
+    },
+    {
+      "class_index": 35,
+      "class_name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+      "plant": "Tomato",
+      "disease": "Yellow Leaf Curl Virus",
+      "is_healthy": false,
+      "disease_type": "viral",
+      "pathogen": "Tomato Yellow Leaf Curl Begomovirus (TYLCV)",
+      "synonyms": ["TYLCV", "Tomato Yellow Leaf Curl"]
+    },
+    {
+      "class_index": 36,
+      "class_name": "Tomato___Tomato_mosaic_virus",
+      "plant": "Tomato",
+      "disease": "Mosaic Virus",
+      "is_healthy": false,
+      "disease_type": "viral",
+      "pathogen": "Tomato Mosaic Tobamovirus (ToMV)",
+      "synonyms": ["ToMV", "Tomato Mosaic Virus"]
+    },
+    {
+      "class_index": 37,
+      "class_name": "Tomato___healthy",
+      "plant": "Tomato",
+      "disease": "Healthy",
+      "is_healthy": true,
+      "disease_type": "healthy",
+      "pathogen": null,
+      "synonyms": ["Healthy Tomato Foliage"]
+    }
+  ]
+}

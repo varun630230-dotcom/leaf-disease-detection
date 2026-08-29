@@ -1,0 +1,27 @@
+{
+  "plant": "Tomato",
+  "disease": "Bacterial Spot",
+  "class_name": "Tomato___Bacterial_spot",
+  "disease_type": "bacterial",
+  "pathogen": "Xanthomonas perforans & Xanthomonas euvesicatoria",
+  "symptoms": [
+    "Small (1-3 mm), dark brown to black angular water-soaked leaf spots",
+    "Lesion centers dry up and tear away creating a shot-hole appearance",
+    "Yellowing around lesions causing severe premature leaf drop",
+    "Raised blister-like scabs on green and ripening fruits"
+  ],
+  "risk_factors": [
+    "High temperatures (25-30\u00b0C) with frequent rain or overhead irrigation",
+    "High wind-driven rain spreading bacterial cells across field",
+    "Working in wet foliage spreading bacterial exudate"
+  ],
+  "prevention": [
+    "Use hot-water treated or certified disease-free certified seeds",
+    "Never work or prune plants when foliage is wet",
+    "Maintain strict 2-3 year crop rotation away from pepper and tomato"
+  ],
+  "recommended_actions": [
+    "Spray copper hydroxide combined with mancozeb or bacteriophage solutions",
+    "Remove and destroy heavily infested volunteer plants"
+  ]
+}

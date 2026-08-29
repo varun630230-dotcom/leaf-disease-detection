@@ -1,0 +1,23 @@
+{
+  "plant": "Grape",
+  "disease": "Esca (Black Measles)",
+  "class_name": "Grape___Esca_(Black_Measles)",
+  "disease_type": "fungal",
+  "pathogen": "Phaeomoniella chlamydospora & Phaeoacremonium aleophilum",
+  "symptoms": [
+    "'Tiger stripe' interveinal chlorosis and necrosis on mature leaves",
+    "Dark brown/purple speckling on grape berry skins ('measles')",
+    "Apoplexy (sudden mid-summer vine collapse and wilting)"
+  ],
+  "risk_factors": [
+    "Older established vineyards with large pruning wounds exposed to rain",
+    "Summer heat and drought stress on infected vines"
+  ],
+  "prevention": [
+    "Prune late in the dormant season and protect large cuts with wound sealant",
+    "Avoid severe water stress through balanced deficit irrigation"
+  ],
+  "recommended_actions": [
+    "Retrain suckers from trunk base to renew canopy on severely cankered vines"
+  ]
+}

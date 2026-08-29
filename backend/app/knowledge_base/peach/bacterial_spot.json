@@ -1,0 +1,21 @@
+{
+  "plant": "Peach",
+  "disease": "Bacterial Spot",
+  "class_name": "Peach___Bacterial_spot",
+  "disease_type": "bacterial",
+  "pathogen": "Xanthomonas arboricola pv. pruni",
+  "symptoms": [
+    "Small angular purple-brown spots on leaves",
+    "Spot centers drop out giving a distinct 'shot-hole' appearance",
+    "Cracked, gummy, sunken pits on peach fruit skins"
+  ],
+  "risk_factors": [
+    "Sandy soils, blowing rain, and warm humid spring weather"
+  ],
+  "prevention": [
+    "Plant tolerant peach cultivars; maintain tree vigor with proper fertilization"
+  ],
+  "recommended_actions": [
+    "Apply dormant copper sprays and early season oxytetracycline applications"
+  ]
+}

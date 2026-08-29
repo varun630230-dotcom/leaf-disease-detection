@@ -6,6 +6,8 @@ import ImageAnalysisViewer from '../components/ImageAnalysisViewer';
 import PredictionSummary from '../components/PredictionSummary';
 import RejectedImageState from '../components/RejectedImageState';
 import UncertainState from '../components/UncertainState';
+import UnknownConditionState from '../components/UnknownConditionState';
+import DiseaseKnowledgeCard from '../components/DiseaseKnowledgeCard';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 
 export default function ResultPage() {
@@ -61,6 +63,10 @@ export default function ResultPage() {
     return <RejectedImageState reason={result.reason} message={result.message} />;
   }
 
+  if (result.status === 'unknown') {
+    return <UnknownConditionState plant={result.plant} message={result.message} />;
+  }
+
   if (result.status === 'uncertain') {
     return <UncertainState message={result.message} />;
   }
@@ -95,10 +101,17 @@ export default function ResultPage() {
         </div>
 
         {/* Right Column: Prediction Summary */}
-        <div className="w-full">
+        <div className="w-full space-y-6">
           <PredictionSummary result={result} />
         </div>
       </div>
+
+      {/* Verified Agronomic Knowledge Section (Diseased Only) */}
+      {result.knowledge && (
+        <div className="pt-2">
+          <DiseaseKnowledgeCard knowledge={result.knowledge} />
+        </div>
+      )}
     </div>
   );
 }

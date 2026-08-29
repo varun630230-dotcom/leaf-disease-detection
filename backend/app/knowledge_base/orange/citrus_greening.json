@@ -1,0 +1,25 @@
+{
+  "plant": "Orange",
+  "disease": "Citrus Greening (Huanglongbing)",
+  "class_name": "Orange___Haunglongbing_(Citrus_greening)",
+  "disease_type": "bacterial",
+  "pathogen": "Candidatus Liberibacter asiaticus (Fastidious Bacterium)",
+  "symptoms": [
+    "Asymmetrical blotchy mottle chlorosis across leaf midribs (yellowing)",
+    "Yellow vein corking and small, upright chlorotic leaves",
+    "Lopsided, small, bitter fruit with inverted coloration (green at bottom)",
+    "Progressive twig dieback and systemic tree decline"
+  ],
+  "risk_factors": [
+    "Asian Citrus Psyllid (Diaphorina citri) insect vectors",
+    "Movement of uncertified citrus nursery stock"
+  ],
+  "prevention": [
+    "Plant strictly certified disease-free nursery trees",
+    "Scout for and suppress Asian citrus psyllid populations with systemic insecticides"
+  ],
+  "recommended_actions": [
+    "Remove infected trees promptly to prevent vector spread to adjacent groves",
+    "Apply balanced foliar micronutrients to support remaining root system"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "plant": "Apple",
+  "disease": "Black Rot",
+  "class_name": "Apple___Black_rot",
+  "disease_type": "fungal",
+  "pathogen": "Botryosphaeria obtusa",
+  "symptoms": [
+    "Small purple flecks enlarging into 'frogeye' spots with purple borders and tan centers",
+    "Dark sunken cankers on limbs and branches",
+    "Black rotting mummified fruits hanging on tree into winter"
+  ],
+  "risk_factors": [
+    "Warm humid conditions (26-30\u00b0C) with dead wood or fruit mummies in tree"
+  ],
+  "prevention": [
+    "Prune out dead wood, cankers, and remove all mummified apples during winter",
+    "Avoid mechanical damage to tree bark during mowing and cultivation"
+  ],
+  "recommended_actions": [
+    "Prune cankered limbs at least 15 cm below infected tissue; sterilize tools between cuts"
+  ]
+}

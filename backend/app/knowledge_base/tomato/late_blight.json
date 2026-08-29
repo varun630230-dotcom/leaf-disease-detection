@@ -1,0 +1,29 @@
+{
+  "plant": "Tomato",
+  "disease": "Late Blight",
+  "class_name": "Tomato___Late_blight",
+  "disease_type": "fungal",
+  "pathogen": "Phytophthora infestans (Oomycete)",
+  "symptoms": [
+    "Irregular, water-soaked greasy lesions rapidly expanding on foliage",
+    "Pale yellow/chlorotic halo bordering dark necrotic lesions",
+    "White velvety sporulation on the underside of leaves in high humidity",
+    "Rapid browning and collapse of whole leaflets and stems"
+  ],
+  "risk_factors": [
+    "Cool, wet weather with temperatures between 15-22\u00b0C (60-72\u00b0F)",
+    "Prolonged relative humidity (>90%) and leaf wetness >8 hours",
+    "Overhead sprinkler irrigation wetting upper canopy"
+  ],
+  "prevention": [
+    "Plant certified disease-free seed and resistant cultivars (e.g. Mountain Magic, Defiant)",
+    "Ensure wide spacing (60-90 cm) for optimal canopy ventilation",
+    "Drip irrigate at soil line to keep leaves completely dry",
+    "Practice minimum 3-year crop rotation away from Solanaceae (potato, pepper)"
+  ],
+  "recommended_actions": [
+    "Prune and bag severely infected leaves immediately; do not compost",
+    "Apply protective copper octanoate or bio-fungicide (Bacillus subtilis) preventatively",
+    "Sanitize pruning shears with 70% isopropyl alcohol between plants"
+  ]
+}

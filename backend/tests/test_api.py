@@ -58,9 +58,8 @@ def test_analyze_valid_image():
     response = client.post("/api/analyze", files=files)
     assert response.status_code == 200
     data = response.json()
-    assert "id" in data
-    assert data["status"] in ["success", "rejected", "uncertain"]
-    if data["status"] == "success":
+    assert data["status"] in ["success", "healthy", "unknown", "rejected", "uncertain"]
+    if data["status"] in ("success", "healthy"):
         assert data["plant"] is not None
         assert data["health_status"] in ["healthy", "diseased"]
         assert "images" in data

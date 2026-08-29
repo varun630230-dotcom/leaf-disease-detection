@@ -1,0 +1,24 @@
+{
+  "plant": "Tomato",
+  "disease": "Spider Mites (Two-Spotted)",
+  "class_name": "Tomato___Spider_mites Two-spotted_spider_mite",
+  "disease_type": "pest_mite",
+  "pathogen": "Tetranychus urticae (Arachnid Pest)",
+  "symptoms": [
+    "Fine yellow stippling or bronzing on upper leaf surfaces",
+    "Delicate fine webbing visible between veins and leaf petioles",
+    "Leaves turn chlorotic, dry out, and acquire a brittle bleached texture"
+  ],
+  "risk_factors": [
+    "Hot, dry, and dusty conditions (>30\u00b0C and low humidity)",
+    "Overuse of broad-spectrum synthetic insecticides killing natural predators"
+  ],
+  "prevention": [
+    "Maintain adequate soil moisture and avoid water stress",
+    "Hose down dusty perimeter roads and garden borders"
+  ],
+  "recommended_actions": [
+    "Apply insecticidal soap, neem oil, or horticultural oils to leaf undersides",
+    "Introduce predatory mites (Phytoseiulus persimilis) for biological control"
+  ]
+}

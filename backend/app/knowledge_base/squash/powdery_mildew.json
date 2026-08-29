@@ -1,0 +1,22 @@
+{
+  "plant": "Squash",
+  "disease": "Powdery Mildew",
+  "class_name": "Squash___Powdery_mildew",
+  "disease_type": "fungal",
+  "pathogen": "Podosphaera xanthii",
+  "symptoms": [
+    "White, talcum-powder-like spots on upper and lower leaf surfaces and petioles",
+    "Spots rapidly coalesce covering the entire leaf blade",
+    "Leaves turn yellow, brown, and dry to a crisp parchment texture"
+  ],
+  "risk_factors": [
+    "Dense canopy shading with dry weather and high humidity"
+  ],
+  "prevention": [
+    "Plant powdery mildew-resistant squash varieties (PMR cultivars)",
+    "Space plants widely (1-1.5 meters) in full direct sun"
+  ],
+  "recommended_actions": [
+    "Apply potassium bicarbonate, neem oil, or sulfur at first appearance of white spots"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "plant": "Cherry",
+  "disease": "Powdery Mildew",
+  "class_name": "Cherry_(including_sour)___Powdery_mildew",
+  "disease_type": "fungal",
+  "pathogen": "Podosphaera clandestina",
+  "symptoms": [
+    "White circular powdery fungal patches on young leaves and shoots",
+    "Leaf curling, distortion, and upward cupping of young foliage",
+    "White web-like fungal mycelium on cherry fruits causing unmarketable fruit"
+  ],
+  "risk_factors": [
+    "Warm days (21-27\u00b0C) with high relative humidity and low direct sunlight"
+  ],
+  "prevention": [
+    "Prune inner canopy to improve light penetration and airflow"
+  ],
+  "recommended_actions": [
+    "Apply sulfur, horticultural oils, or DMI fungicides starting at shuck fall"
+  ]
+}

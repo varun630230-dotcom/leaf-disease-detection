@@ -1,110 +1,98 @@
-"""LeafGuard AI — PlantVillage 38-class dataset mapping and metadata."""
+"""LeafGuard AI — Dynamic Plant & Disease Class Taxonomy Registry."""
 
+import json
+import logging
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+logger = logging.getLogger(__name__)
 
-@dataclass(frozen=True)
+# Base path for models
+MODELS_DIR = Path(__file__).resolve().parent.parent.parent.parent / "models" / "classifier"
+
+
+@dataclass
 class ClassInfo:
-    index: int
+    class_index: int
     class_name: str
     plant: str
     disease: Optional[str]
     is_healthy: bool
-    display_name: str
+    disease_type: str = "fungal"  # "fungal" | "bacterial" | "viral" | "pest_mite" | "healthy"
+    pathogen: Optional[str] = None
+    synonyms: List[str] = None
+
+    @property
+    def display_name(self) -> str:
+        if self.is_healthy:
+            return f"{self.plant} (Healthy)"
+        return f"{self.plant} — {self.disease}"
 
 
-PLANTVILLAGE_CLASSES = [
-    "Apple___Apple_scab",
-    "Apple___Black_rot",
-    "Apple___Cedar_apple_rust",
-    "Apple___healthy",
-    "Blueberry___healthy",
-    "Cherry_(including_sour)___Powdery_mildew",
-    "Cherry_(including_sour)___healthy",
-    "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
-    "Corn_(maize)___Common_rust_",
-    "Corn_(maize)___Northern_Leaf_Blight",
-    "Corn_(maize)___healthy",
-    "Grape___Black_rot",
-    "Grape___Esca_(Black_Measles)",
-    "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
-    "Grape___healthy",
-    "Orange___Haunglongbing_(Citrus_greening)",
-    "Peach___Bacterial_spot",
-    "Peach___healthy",
-    "Pepper,_bell___Bacterial_spot",
-    "Pepper,_bell___healthy",
-    "Potato___Early_blight",
-    "Potato___Late_blight",
-    "Potato___healthy",
-    "Raspberry___healthy",
-    "Soybean___healthy",
-    "Squash___Powdery_mildew",
-    "Strawberry___Leaf_scorch",
-    "Strawberry___healthy",
-    "Tomato___Bacterial_spot",
-    "Tomato___Early_blight",
-    "Tomato___Late_blight",
-    "Tomato___Leaf_Mold",
-    "Tomato___Septoria_leaf_spot",
-    "Tomato___Spider_mites Two-spotted_spider_mite",
-    "Tomato___Target_Spot",
-    "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
-    "Tomato___Tomato_mosaic_virus",
-    "Tomato___healthy",
-]
+def _load_taxonomy_registry() -> Tuple[Dict[int, ClassInfo], Dict[str, ClassInfo], List[str]]:
+    taxonomy_path = MODELS_DIR / "taxonomy.json"
+    mapping_path = MODELS_DIR / "class_mapping.json"
+
+    class_index: Dict[int, ClassInfo] = {}
+    class_name_index: Dict[str, ClassInfo] = {}
+    crops: List[str] = []
+
+    if taxonomy_path.exists():
+        try:
+            with open(taxonomy_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                crops = data.get("crops", [])
+                for item in data.get("classes", []):
+                    info = ClassInfo(
+                        class_index=int(item["class_index"]),
+                        class_name=item["class_name"],
+                        plant=item["plant"],
+                        disease=None if item["is_healthy"] else item["disease"],
+                        is_healthy=bool(item["is_healthy"]),
+                        disease_type=item.get("disease_type", "fungal"),
+                        pathogen=item.get("pathogen"),
+                        synonyms=item.get("synonyms", []),
+                    )
+                    class_index[info.class_index] = info
+                    class_name_index[info.class_name] = info
+        except Exception as e:
+            logger.error(f"Error reading taxonomy.json: {e}")
+
+    # Fallback to class_mapping.json if needed
+    if not class_index and mapping_path.exists():
+        try:
+            with open(mapping_path, "r", encoding="utf-8") as f:
+                raw = json.load(f)
+                for idx_str, item in raw.items():
+                    idx = int(idx_str)
+                    is_h = bool(item["is_healthy"])
+                    info = ClassInfo(
+                        class_index=idx,
+                        class_name=item["class_name"],
+                        plant=item["plant"],
+                        disease=None if is_h else item["disease"],
+                        is_healthy=is_h,
+                        disease_type=item.get("disease_type", "healthy" if is_h else "fungal"),
+                    )
+                    class_index[idx] = info
+                    class_name_index[info.class_name] = info
+                    if info.plant not in crops:
+                        crops.append(info.plant)
+        except Exception as e:
+            logger.error(f"Error reading class_mapping.json: {e}")
+
+    return class_index, class_name_index, crops
 
 
-def parse_class_name(index: int, raw_name: str) -> ClassInfo:
-    parts = raw_name.split("___")
-    if len(parts) == 2:
-        raw_plant, raw_disease = parts
-    else:
-        raw_plant = parts[0]
-        raw_disease = "unknown"
-
-    plant = (
-        raw_plant.replace("_", " ")
-        .replace("(including sour)", "")
-        .replace("(maize)", "")
-        .replace(", bell", " Bell")
-        .strip()
-    )
-
-    is_healthy = raw_disease.lower() == "healthy"
-
-    if is_healthy:
-        disease = None
-        display_name = f"{plant} (Healthy)"
-    else:
-        disease = (
-            raw_disease.replace("_", " ")
-            .replace("  ", " ")
-            .replace("Haunglongbing (Citrus greening)", "Citrus Greening")
-            .strip()
-        )
-        display_name = f"{plant} — {disease}"
-
-    return ClassInfo(
-        index=index,
-        class_name=raw_name,
-        plant=plant,
-        disease=disease,
-        is_healthy=is_healthy,
-        display_name=display_name,
-    )
+CLASS_INDEX, CLASS_NAME_INDEX, SUPPORTED_PLANTS = _load_taxonomy_registry()
+CLASS_NAME_TO_INFO = CLASS_NAME_INDEX
+PLANTVILLAGE_CLASSES = list(CLASS_NAME_INDEX.keys())
+NUM_CLASSES = len(CLASS_INDEX) if CLASS_INDEX else 38
 
 
-CLASS_INDEX: Dict[int, ClassInfo] = {
-    i: parse_class_name(i, name) for i, name in enumerate(PLANTVILLAGE_CLASSES)
-}
-
-CLASS_NAME_TO_INFO: Dict[str, ClassInfo] = {
-    info.class_name: info for info in CLASS_INDEX.values()
-}
-
-NUM_CLASSES = len(PLANTVILLAGE_CLASSES)
+def get_supported_plants() -> List[str]:
+    return list(SUPPORTED_PLANTS)
 
 
 def get_class_info(index: int) -> Optional[ClassInfo]:
@@ -112,9 +100,19 @@ def get_class_info(index: int) -> Optional[ClassInfo]:
 
 
 def get_class_info_by_name(name: str) -> Optional[ClassInfo]:
-    return CLASS_NAME_TO_INFO.get(name)
+    return CLASS_NAME_INDEX.get(name)
 
 
-def get_supported_plants() -> List[str]:
-    plants = sorted(list({info.plant for info in CLASS_INDEX.values()}))
-    return plants
+def get_classes_for_plant(plant_name: str) -> List[ClassInfo]:
+    """Returns all supported disease and healthy classes for a specific crop."""
+    target = plant_name.lower()
+    return [c for c in CLASS_INDEX.values() if c.plant.lower() == target]
+
+
+def get_healthy_class_for_plant(plant_name: str) -> Optional[ClassInfo]:
+    """Returns the healthy ClassInfo for a given crop."""
+    target = plant_name.lower()
+    for c in CLASS_INDEX.values():
+        if c.plant.lower() == target and c.is_healthy:
+            return c
+    return None

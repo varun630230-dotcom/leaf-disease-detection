@@ -1,0 +1,24 @@
+{
+  "plant": "Tomato",
+  "disease": "Mosaic Virus",
+  "class_name": "Tomato___Tomato_mosaic_virus",
+  "disease_type": "viral",
+  "pathogen": "Tomato Mosaic Tobamovirus (ToMV)",
+  "symptoms": [
+    "Mottled light and dark green mosaic patterns on foliage",
+    "Leaf distortion, blistering, and stringy 'shoestring' leaves",
+    "Internal brown browning in tomato fruit wall"
+  ],
+  "risk_factors": [
+    "Mechanical transmission via hands, pruning shears, and smokers",
+    "Infected seed or root-to-root contact"
+  ],
+  "prevention": [
+    "Wash hands thoroughly with soap/milk before handling plants",
+    "Disinfect tools in 20% nonfat dry milk or trisodium phosphate (TSP)",
+    "Plant ToMV-resistant tomato varieties"
+  ],
+  "recommended_actions": [
+    "Remove infected plants immediately to prevent sap spread to neighbors"
+  ]
+}

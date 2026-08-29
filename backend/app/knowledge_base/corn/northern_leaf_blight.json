@@ -1,0 +1,22 @@
+{
+  "plant": "Corn",
+  "disease": "Northern Leaf Blight",
+  "class_name": "Corn_(maize)___Northern_Leaf_Blight",
+  "disease_type": "fungal",
+  "pathogen": "Exserohilum turcicum",
+  "symptoms": [
+    "Long, cigar-shaped or elliptical grayish-green to tan lesions (2-15 cm)",
+    "Dark fungal spore mat forming in lesion center during wet weather",
+    "Extensive blighting of upper canopy leaves"
+  ],
+  "risk_factors": [
+    "Moderate temperatures (18-27\u00b0C) with extended 6-18 hr leaf wetness periods"
+  ],
+  "prevention": [
+    "Plant corn hybrids with Ht-gene resistance",
+    "Rotate crops with non-grasses like soybean"
+  ],
+  "recommended_actions": [
+    "Apply foliar fungicides at silking if lesions appear on the third leaf below ear or higher"
+  ]
+}

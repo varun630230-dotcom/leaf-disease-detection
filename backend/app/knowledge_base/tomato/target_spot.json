@@ -1,0 +1,24 @@
+{
+  "plant": "Tomato",
+  "disease": "Target Spot",
+  "class_name": "Tomato___Target_Spot",
+  "disease_type": "fungal",
+  "pathogen": "Corynespora cassiicola",
+  "symptoms": [
+    "Pinpoint brown spots expanding to circular brown lesions with light brown centers",
+    "Dark concentric rings and pronounced yellow halos",
+    "Severe leaf drop leading to exposed sun-scalded fruit"
+  ],
+  "risk_factors": [
+    "Warm, humid tropical and subtropical growing conditions (25-32\u00b0C)",
+    "Dense canopy shading lower leaves"
+  ],
+  "prevention": [
+    "Maintain open canopy pruning to promote rapid leaf drying",
+    "Avoid planting adjacent to alternative hosts like soybean or cucumber"
+  ],
+  "recommended_actions": [
+    "Apply azoxystrobin or copper fungicides upon early detection",
+    "Remove dead leaf debris from underneath canopy"
+  ]
+}

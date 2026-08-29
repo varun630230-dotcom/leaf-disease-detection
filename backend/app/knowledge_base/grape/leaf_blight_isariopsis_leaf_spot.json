@@ -1,0 +1,23 @@
+{
+  "plant": "Grape",
+  "disease": "Leaf Blight (Isariopsis Leaf Spot)",
+  "class_name": "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
+  "disease_type": "fungal",
+  "pathogen": "Pseudocercospora cladosporioides",
+  "symptoms": [
+    "Large, irregular dark brown necrotic patches spreading across leaf margins",
+    "Yellow halo encircling the dead tissue",
+    "Extensive leaf browning and premature vine defoliation in late summer"
+  ],
+  "risk_factors": [
+    "Warm, humid mid-to-late summer conditions",
+    "Dense, unpruned canopies trapping moisture"
+  ],
+  "prevention": [
+    "Perform shoot positioning and leaf pulling around fruit zone for airflow",
+    "Apply post-harvest copper sprays to suppress overwintering inoculum"
+  ],
+  "recommended_actions": [
+    "Apply copper sulfate or azoxystrobin upon observing initial marginal leaf browning"
+  ]
+}

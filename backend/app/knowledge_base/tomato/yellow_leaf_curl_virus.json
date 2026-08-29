@@ -1,0 +1,26 @@
+{
+  "plant": "Tomato",
+  "disease": "Yellow Leaf Curl Virus",
+  "class_name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+  "disease_type": "viral",
+  "pathogen": "Tomato Yellow Leaf Curl Begomovirus (TYLCV)",
+  "symptoms": [
+    "Severe upward curling and cupping of leaflet margins",
+    "Pronounced interveinal chlorosis (yellowing) on young growth",
+    "Extreme plant stunting and bushy erect growth habit",
+    "Complete flower drop resulting in zero fruit set"
+  ],
+  "risk_factors": [
+    "Presence of sweetpotato whitefly vector (Bemisia tabaci)",
+    "Warm weather promoting rapid whitefly population spikes"
+  ],
+  "prevention": [
+    "Plant TYLCV-resistant hybrids (Ty-1, Ty-2, Ty-3 gene cultivars)",
+    "Use fine mesh insect netting (50 mesh) in greenhouses to exclude whiteflies",
+    "Use reflective silver mulches to repel whitefly landings"
+  ],
+  "recommended_actions": [
+    "Immediately rogue out and destroy infected viral plants in sealed plastic bags",
+    "Apply insecticidal soaps or systemic treatments for whitefly control"
+  ]
+}

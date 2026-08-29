@@ -1,0 +1,22 @@
+{
+  "plant": "Strawberry",
+  "disease": "Leaf Scorch",
+  "class_name": "Strawberry___Leaf_scorch",
+  "disease_type": "fungal",
+  "pathogen": "Diplocarpon earlianum",
+  "symptoms": [
+    "Numerous small, irregular purplish-red blotches on upper leaf surfaces",
+    "Blotches enlarge and merge without a white center, turning leaves brown and scorched",
+    "Calyx (fruit cap) infection causing brown withered fruit tops"
+  ],
+  "risk_factors": [
+    "Warm, humid weather with frequent rain or overhead sprinkler watering"
+  ],
+  "prevention": [
+    "Plant resistant strawberry cultivars in well-draining raised beds",
+    "Mow and remove infected foliage immediately after harvest (renovation)"
+  ],
+  "recommended_actions": [
+    "Apply captan or thiophanate-methyl fungicides during spring flower and runner development"
+  ]
+}

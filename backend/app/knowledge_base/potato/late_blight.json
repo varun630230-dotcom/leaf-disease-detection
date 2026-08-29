@@ -1,0 +1,22 @@
+{
+  "plant": "Potato",
+  "disease": "Late Blight",
+  "class_name": "Potato___Late_blight",
+  "disease_type": "fungal",
+  "pathogen": "Phytophthora infestans",
+  "symptoms": [
+    "Rapidly enlarging water-soaked dark brown/black lesions on foliage and stems",
+    "White moldy sporulation on leaf undersides in morning dew",
+    "Tuber dry rot with reddish-brown granular flesh beneath skin"
+  ],
+  "risk_factors": [
+    "Cool, wet conditions (15-20\u00b0C) with prolonged rainfall or humidity"
+  ],
+  "prevention": [
+    "Plant only certified disease-free seed tubers",
+    "Eliminate cull piles and volunteer potatoes that harbor overwintering mycelium"
+  ],
+  "recommended_actions": [
+    "Apply systemic late-blight fungicides immediately upon regional blight alerts"
+  ]
+}

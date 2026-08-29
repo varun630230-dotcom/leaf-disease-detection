@@ -1,0 +1,22 @@
+{
+  "plant": "Pepper",
+  "disease": "Bacterial Spot",
+  "class_name": "Pepper,_bell___Bacterial_spot",
+  "disease_type": "bacterial",
+  "pathogen": "Xanthomonas campestris pv. vesicatoria",
+  "symptoms": [
+    "Small, irregular water-soaked spots turning dark brown on leaf surfaces",
+    "Leaves turn yellow and drop severely, exposing fruit to sunscald",
+    "Raised warty blisters and scabs on pepper fruit walls"
+  ],
+  "risk_factors": [
+    "High temperatures (24-30\u00b0C) with rain, overhead watering, and high humidity"
+  ],
+  "prevention": [
+    "Use certified disease-free seed and resistant bell pepper cultivars (Bs1, Bs2, Bs3)",
+    "Drip irrigate to avoid wetting foliage"
+  ],
+  "recommended_actions": [
+    "Spray copper bactericide mixed with mancozeb for enhanced efficacy"
+  ]
+}

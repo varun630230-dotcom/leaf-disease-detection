@@ -1,0 +1,25 @@
+{
+  "plant": "Apple",
+  "disease": "Apple Scab",
+  "class_name": "Apple___Apple_scab",
+  "disease_type": "fungal",
+  "pathogen": "Venturia inaequalis",
+  "symptoms": [
+    "Olive-green to velvety dark brown circular spots on leaf surfaces",
+    "Lesions turn corky, dark, and puckered as leaves age",
+    "Premature yellowing and leaf shedding in mid-summer",
+    "Corky, scabby brown crusts on developing apple fruits"
+  ],
+  "risk_factors": [
+    "Cool, wet spring weather during bud break and petal fall (13-24\u00b0C)",
+    "Overwintering fungal perithecia on fallen leaf litter"
+  ],
+  "prevention": [
+    "Rake and shred or compost fallen apple leaves in autumn to eliminate primary inoculum",
+    "Plant scab-resistant apple cultivars (e.g. Liberty, Enterprise, GoldRush)",
+    "Prune tree canopy in winter for maximum sunlight penetration"
+  ],
+  "recommended_actions": [
+    "Apply preventative sulfur or captan sprays from green tip through petal fall"
+  ]
+}

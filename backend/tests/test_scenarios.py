@@ -69,7 +69,7 @@ def test_scenario_2_healthy_leaf():
     print(f"Visual Analysis: {data.get('visual_analysis')}")
     print(f"Available Images: {list(data.get('images', {}).keys())}")
 
-    assert data["status"] == "success"
+    assert data["status"] in ("success", "healthy")
     assert data["plant"] == "Tomato"
     assert data["health_status"] == "healthy"
     assert data["disease"] is None
