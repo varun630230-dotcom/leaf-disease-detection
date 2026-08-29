@@ -1,7 +1,7 @@
 {
   "Apple___Apple_scab": {
     "plant": "Apple",
-    "disease": "Apple scab",
+    "disease": "Apple Scab",
     "is_healthy": false,
     "precision": 0.972,
     "recall": 0.957,
@@ -10,7 +10,7 @@
   },
   "Apple___Black_rot": {
     "plant": "Apple",
-    "disease": "Black rot",
+    "disease": "Black Rot",
     "is_healthy": false,
     "precision": 0.932,
     "recall": 0.968,
@@ -19,7 +19,7 @@
   },
   "Apple___Cedar_apple_rust": {
     "plant": "Apple",
-    "disease": "Cedar apple rust",
+    "disease": "Cedar Apple Rust",
     "is_healthy": false,
     "precision": 0.91,
     "recall": 0.948,
@@ -46,7 +46,7 @@
   },
   "Cherry_(including_sour)___Powdery_mildew": {
     "plant": "Cherry",
-    "disease": "Powdery mildew",
+    "disease": "Powdery Mildew",
     "is_healthy": false,
     "precision": 0.997,
     "recall": 0.998,
@@ -64,7 +64,7 @@
   },
   "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
     "plant": "Corn",
-    "disease": "Cercospora leaf spot Gray leaf spot",
+    "disease": "Gray Leaf Spot",
     "is_healthy": false,
     "precision": 0.942,
     "recall": 0.907,
@@ -73,7 +73,7 @@
   },
   "Corn_(maize)___Common_rust_": {
     "plant": "Corn",
-    "disease": "Common rust",
+    "disease": "Common Rust",
     "is_healthy": false,
     "precision": 0.923,
     "recall": 0.997,
@@ -100,7 +100,7 @@
   },
   "Grape___Black_rot": {
     "plant": "Grape",
-    "disease": "Black rot",
+    "disease": "Black Rot",
     "is_healthy": false,
     "precision": 0.941,
     "recall": 0.941,
@@ -118,7 +118,7 @@
   },
   "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": {
     "plant": "Grape",
-    "disease": "Leaf blight (Isariopsis Leaf Spot)",
+    "disease": "Leaf Blight (Isariopsis Leaf Spot)",
     "is_healthy": false,
     "precision": 0.95,
     "recall": 0.931,
@@ -136,7 +136,7 @@
   },
   "Orange___Haunglongbing_(Citrus_greening)": {
     "plant": "Orange",
-    "disease": "Citrus Greening",
+    "disease": "Citrus Greening (Huanglongbing)",
     "is_healthy": false,
     "precision": 0.968,
     "recall": 0.925,
@@ -145,7 +145,7 @@
   },
   "Peach___Bacterial_spot": {
     "plant": "Peach",
-    "disease": "Bacterial spot",
+    "disease": "Bacterial Spot",
     "is_healthy": false,
     "precision": 0.956,
     "recall": 0.99,
@@ -162,8 +162,8 @@
     "support": 227
   },
   "Pepper,_bell___Bacterial_spot": {
-    "plant": "Pepper Bell",
-    "disease": "Bacterial spot",
+    "plant": "Pepper",
+    "disease": "Bacterial Spot",
     "is_healthy": false,
     "precision": 0.979,
     "recall": 0.914,
@@ -171,7 +171,7 @@
     "support": 241
   },
   "Pepper,_bell___healthy": {
-    "plant": "Pepper Bell",
+    "plant": "Pepper",
     "disease": "Healthy",
     "is_healthy": true,
     "precision": 0.935,
@@ -181,7 +181,7 @@
   },
   "Potato___Early_blight": {
     "plant": "Potato",
-    "disease": "Early blight",
+    "disease": "Early Blight",
     "is_healthy": false,
     "precision": 0.972,
     "recall": 0.962,
@@ -190,7 +190,7 @@
   },
   "Potato___Late_blight": {
     "plant": "Potato",
-    "disease": "Late blight",
+    "disease": "Late Blight",
     "is_healthy": false,
     "precision": 0.932,
     "recall": 0.963,
@@ -226,7 +226,7 @@
   },
   "Squash___Powdery_mildew": {
     "plant": "Squash",
-    "disease": "Powdery mildew",
+    "disease": "Powdery Mildew",
     "is_healthy": false,
     "precision": 0.938,
     "recall": 0.957,
@@ -235,7 +235,7 @@
   },
   "Strawberry___Leaf_scorch": {
     "plant": "Strawberry",
-    "disease": "Leaf scorch",
+    "disease": "Leaf Scorch",
     "is_healthy": false,
     "precision": 0.99,
     "recall": 0.991,
@@ -253,7 +253,7 @@
   },
   "Tomato___Bacterial_spot": {
     "plant": "Tomato",
-    "disease": "Bacterial spot",
+    "disease": "Bacterial Spot",
     "is_healthy": false,
     "precision": 0.968,
     "recall": 0.958,
@@ -262,7 +262,7 @@
   },
   "Tomato___Early_blight": {
     "plant": "Tomato",
-    "disease": "Early blight",
+    "disease": "Early Blight",
     "is_healthy": false,
     "precision": 0.969,
     "recall": 0.998,
@@ -271,7 +271,7 @@
   },
   "Tomato___Late_blight": {
     "plant": "Tomato",
-    "disease": "Late blight",
+    "disease": "Late Blight",
     "is_healthy": false,
     "precision": 0.999,
     "recall": 0.937,
@@ -289,7 +289,7 @@
   },
   "Tomato___Septoria_leaf_spot": {
     "plant": "Tomato",
-    "disease": "Septoria leaf spot",
+    "disease": "Septoria Leaf Spot",
     "is_healthy": false,
     "precision": 0.962,
     "recall": 0.953,
@@ -298,7 +298,7 @@
   },
   "Tomato___Spider_mites Two-spotted_spider_mite": {
     "plant": "Tomato",
-    "disease": "Spider mites Two-spotted spider mite",
+    "disease": "Spider Mites (Two-Spotted)",
     "is_healthy": false,
     "precision": 0.999,
     "recall": 0.975,
@@ -316,7 +316,7 @@
   },
   "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
     "plant": "Tomato",
-    "disease": "Tomato Yellow Leaf Curl Virus",
+    "disease": "Yellow Leaf Curl Virus",
     "is_healthy": false,
     "precision": 0.94,
     "recall": 0.947,
@@ -325,7 +325,7 @@
   },
   "Tomato___Tomato_mosaic_virus": {
     "plant": "Tomato",
-    "disease": "Tomato mosaic virus",
+    "disease": "Mosaic Virus",
     "is_healthy": false,
     "precision": 0.923,
     "recall": 0.982,

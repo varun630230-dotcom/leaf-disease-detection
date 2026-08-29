@@ -82,7 +82,7 @@ export const getAnalysis = async (id: string): Promise<AnalysisResult> => {
         ? raw.affected_area_percent / 100.0
         : undefined,
 
-    confidence: (raw.confidence_percent || 95.0) / 100.0,
+    confidence: raw.confidence_percent !== undefined ? raw.confidence_percent / 100.0 : 0.0,
     confidenceLevel: confLevel,
 
     segmentationAvailable: Boolean(raw.segmentation_available),
@@ -105,10 +105,12 @@ export const getAnalysis = async (id: string): Promise<AnalysisResult> => {
       overlay: raw.images?.overlay ? `${API_BASE}/images/${raw.id}/disease_seg_overlay` : undefined,
     },
 
-    modelInfo: {
-      version: raw.model_version || 'leafguard-efficientnet-b0-v2.0',
-      inferenceTime: Math.round(raw.inference_time_ms || 28),
-    },
+    modelInfo: raw.model_version
+      ? {
+          version: raw.model_version,
+          inferenceTime: Math.round(raw.inference_time_ms || 0),
+        }
+      : undefined,
   };
 
   return result;
@@ -121,7 +123,7 @@ export const getPerformance = async (): Promise<PerformanceData> => {
   }
 
   const raw = await res.json();
-  if (raw.status === 'not_evaluated') {
+  if (raw.status === 'not_evaluated' || !raw.overall) {
     return { status: 'not_evaluated' };
   }
 
@@ -143,21 +145,19 @@ export const getPerformance = async (): Promise<PerformanceData> => {
 
   return {
     status: 'evaluated',
-    overall: raw.overall
-      ? {
-          accuracy: raw.overall.accuracy,
-          precision: raw.overall.macro_avg?.precision || raw.overall.macro_precision || 0.976,
-          recall: raw.overall.macro_avg?.recall || raw.overall.macro_recall || 0.975,
-          f1: raw.overall.macro_avg?.['f1-score'] || raw.overall.macro_f1 || 0.975,
-          support: raw.overall.macro_avg?.support || 8145,
-        }
-      : undefined,
+    overall: {
+      accuracy: raw.overall.accuracy,
+      precision: raw.overall.macro_avg?.precision ?? raw.overall.macro_precision ?? 0,
+      recall: raw.overall.macro_avg?.recall ?? raw.overall.macro_recall ?? 0,
+      f1: raw.overall.macro_avg?.['f1-score'] ?? raw.overall.macro_f1 ?? 0,
+      support: raw.overall.macro_avg?.support ?? 0,
+    },
     perClass: perClassList,
     ood: raw.ood
       ? {
           auroc: raw.ood.auroc,
           fpr95: raw.ood.fpr_at_95tpr,
-          rejectionRate: raw.ood.rejection_rate || raw.ood.rejection_rate_non_leaf || 0.965,
+          rejectionRate: raw.ood.rejection_rate ?? raw.ood.rejection_rate_non_leaf ?? 0,
           energyThreshold: raw.ood.energy_threshold,
         }
       : undefined,

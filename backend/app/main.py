@@ -26,12 +26,12 @@ async def lifespan(app: FastAPI):
 
     # Pre-load models so first request isn't slow
     try:
-        from app.ml.model_manager import ModelManager
-        manager = ModelManager()
-        if manager.is_loaded():
-            logger.info(f"Model loaded: {manager.get_version()}")
+        from app.ml.classification.classifier import PlantClassifier
+        classifier = PlantClassifier()
+        if classifier.is_loaded:
+            logger.info("EfficientNet-B0 multi-class model loaded successfully.")
         else:
-            logger.warning("Model weights not found — running in mock mode")
+            logger.error("MODEL_UNAVAILABLE: Model weights failed to load.")
     except Exception as e:
         logger.error(f"Failed to initialize ML pipeline: {e}")
 
@@ -42,7 +42,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="LeafGuard AI",
     description="Plant Disease Detection & Visual Analysis API",
-    version="1.0.0",
+    version="2.0.0",
     lifespan=lifespan,
 )
 
@@ -88,11 +88,16 @@ app.include_router(api_router, prefix="/api")
 @app.get("/api/health")
 async def health_check():
     """Health check endpoint."""
-    from app.ml.model_manager import ModelManager
-    manager = ModelManager()
+    try:
+        from app.ml.classification.classifier import PlantClassifier
+        classifier = PlantClassifier()
+        loaded = classifier.is_loaded
+    except Exception:
+        loaded = False
+
     return {
-        "status": "ok",
-        "model_loaded": manager.is_loaded(),
-        "model_version": manager.get_version(),
+        "status": "ok" if loaded else "model_unavailable",
+        "model_loaded": loaded,
+        "model_version": "leafguard-efficientnet-b0-v2.0",
         "environment": settings.environment,
     }

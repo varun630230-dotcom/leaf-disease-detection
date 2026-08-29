@@ -3,7 +3,7 @@
     "model": "EfficientNet-B0 (Selected)",
     "accuracy": 0.978,
     "macro_f1": 0.975,
-    "mean_latency_ms": 14.7,
+    "mean_latency_ms": 50.1,
     "model_size_mb": 15.5,
     "is_selected": true
   },

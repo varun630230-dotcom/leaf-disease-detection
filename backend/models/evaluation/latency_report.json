@@ -1,9 +1,9 @@
 {
-  "mean_ms": 14.66,
-  "p50_ms": 14.33,
-  "p95_ms": 17.45,
-  "min_ms": 12.73,
-  "max_ms": 18.7,
+  "mean_ms": 50.14,
+  "p50_ms": 50.33,
+  "p95_ms": 53.21,
+  "min_ms": 44.47,
+  "max_ms": 56.26,
   "model_size_mb": 15.47,
   "device": "cpu",
   "total_parameters": 4056226
