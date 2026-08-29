@@ -32,14 +32,15 @@ class OODDetector:
 
     def detect(self, logits: torch.Tensor, max_prob: float = 1.0) -> OODResult:
         energy_score = self.compute_energy(logits)
-        is_ood = (energy_score < self.threshold) or (max_prob < 0.20)
+        # Energy threshold check
+        is_ood = (energy_score < self.threshold) or (max_prob < 0.25)
 
         if is_ood:
-            logger.info(f"OOD input detected: energy={energy_score:.2f} (threshold={self.threshold})")
+            logger.info(f"OOD condition detected: energy={energy_score:.2f} (threshold={self.threshold})")
             return OODResult(
                 is_in_distribution=False,
                 energy_score=energy_score,
-                rejection_reason="no_supported_leaf_detected",
+                rejection_reason="unsupported_condition",
                 confidence_score=max_prob,
             )
 

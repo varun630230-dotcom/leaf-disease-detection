@@ -23,16 +23,12 @@ logger = logging.getLogger(__name__)
 class AnalysisPipeline:
     """Production Multi-Crop Multi-Disease Inference Pipeline for LeafGuard AI.
     
-    Orchestrates:
-      1. Image Quality Validation
-      2. Semantic ImageNet Leaf Detection (Non-leaf rejection)
-      3. Image Normalization & Tensor Preprocessing
-      4. EfficientNet-B0 Hierarchical Plant & Disease Classification
-      5. Free-Energy Out-Of-Distribution (OOD) Detection
-      6. Confidence Calibration & Unknown Condition Guard
-      7. Genuine Grad-CAM Saliency Map Generation
-      8. Standalone Lesion Segmentation & Surface Area Measurement
-      9. Verified Agronomic Knowledge Attachment
+    Strictly enforces 5 diagnostic states:
+      1. REJECTED: Non-plant objects (cars, animals, buildings, non-vegetative objects)
+      2. UNKNOWN / UNSUPPORTED CONDITION: Valid plant leaf with an unrepresented/unseen condition
+      3. UNCERTAIN: Valid leaf with ambiguous or low classification confidence
+      4. HEALTHY: Valid leaf with healthy chlorophyll and no disease pathology
+      5. DISEASE PREDICTION (SUCCESS): Valid leaf with supported disease and verified agronomic profile
     """
 
     def __init__(self):
@@ -68,14 +64,14 @@ class AnalysisPipeline:
                     "timings": timings,
                 }
 
-            # ── 2. Leaf Detection (ImageNet Semantic Filter) ─────────
+            # ── 2. Leaf Detection (Non-plant rejection) ──────────────
             t0 = time.time()
             leaf_result = self.leaf_detector.detect_leaf(image_path)
             timings["leaf_detection_ms"] = (time.time() - t0) * 1000
 
             if not leaf_result.leaf_detected:
                 logger.info(
-                    f"Non-leaf object rejected: {leaf_result.detected_category} "
+                    f"Non-plant object rejected: {leaf_result.detected_category} "
                     f"(reason: {leaf_result.reason})"
                 )
                 return {
@@ -104,18 +100,9 @@ class AnalysisPipeline:
             )
             timings["ood_ms"] = (time.time() - t0) * 1000
 
-            if not ood_result.is_in_distribution:
-                logger.info(f"OOD sample rejected: energy={ood_result.energy_score:.2f}")
-                return {
-                    "id": analysis_id,
-                    "status": "rejected",
-                    "reason": ood_result.rejection_reason or "out_of_distribution_image",
-                    "message": "The uploaded image is outside the distribution of supported plant leaves.",
-                    "timings": timings,
-                }
-
-            # ── 6. Unknown Condition / Unsupported Plant Guard ───────
-            if not hier_result.is_supported_condition:
+            # ── 6. Unknown / Unsupported Condition Guard ────────────
+            # Plant leaf is confirmed, but the condition is outside the supported 38-class taxonomy
+            if not hier_result.is_supported_condition or not ood_result.is_in_distribution:
                 logger.info(
                     f"Unknown condition detected: leaf confirmed, but max class probability {hier_result.top_probability:.3f} is below taxonomy threshold."
                 )

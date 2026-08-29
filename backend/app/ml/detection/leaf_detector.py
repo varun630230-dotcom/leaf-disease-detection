@@ -21,7 +21,7 @@ class LeafDetectionResult:
     detected_category: Optional[str] = None
 
 
-NON_PLANT_KEYWORDS = {
+HIGH_CONFIDENCE_NON_PLANT = {
     # Vehicles & parts
     "car", "automobile", "cab", "convertible", "coupe", "jeep", "limousine", "minivan",
     "racer", "sports car", "station wagon", "pickup", "trailer", "truck", "van",
@@ -39,35 +39,27 @@ NON_PLANT_KEYWORDS = {
     "monkey", "gorilla", "chimpanzee", "baboon", "koala", "kangaroo",
     "fish", "shark", "whale", "dolphin", "turtle", "frog", "snake", "lizard",
 
-    # Electronics & Digital
+    # Electronics & Screens
     "web site", "website", "screen", "monitor", "television", "laptop", "notebook",
     "cellular telephone", "hand-held computer", "ipod", "mouse", "keyboard", "printer",
     "modem", "hard disc", "cassette", "cd player", "loudspeaker", "microphone",
 
     # Furniture & Indoor
-    "desk", "dining table", "table", "chair", "armchair", "sofa", "couch", "bed", "wardrobe",
+    "desk", "dining table", "chair", "armchair", "sofa", "couch", "bed", "wardrobe",
     "cabinet", "bookcase", "refrigerator", "microwave", "oven", "toaster", "dishwasher",
-    "lamp", "lampshade", "candle", "curtain", "pillow", "quilt", "rug", "doormat",
 
-    # Buildings & Structures
-    "building", "house", "palace", "church", "monastery", "castle", "bridge", "viaduct",
-    "dam", "pier", "lighthouse", "beacon", "fountain", "monument", "steel arch bridge",
-
-    # Apparel & Items
-    "suit", "dress", "gown", "jersey", "t-shirt", "sweatshirt", "jacket", "coat",
-    "jean", "pants", "shorts", "skirt", "shoe", "boot", "sandal", "sneaker",
-    "hat", "cap", "helmet", "sunglasses", "glasses", "tie", "bow tie", "watch",
-    "backpack", "handbag", "purse", "wallet", "umbrella",
-
-    # Miscellaneous Objects
-    "guitar", "piano", "violin", "drum", "hammer", "screwdriver", "wrench", "pliers",
-    "plate", "cup", "mug", "bottle", "can", "bowl", "fork", "knife", "spoon",
-    "ball", "racket", "dumbbell", "barbell", "balloon", "toy", "envelope", "binder",
+    # Buildings & Architecture
+    "building", "palace", "church", "monastery", "castle", "bridge", "viaduct",
+    "dam", "pier", "lighthouse", "beacon", "monument", "steel arch bridge",
 }
 
 
 class LeafDetector:
-    """Accurately verifies whether the uploaded image contains a supported plant leaf."""
+    """Accurately verifies whether the uploaded image contains plant foliage.
+    
+    Distinguishes genuine non-plant objects (cars, dogs, electronics) from plant leaves,
+    ensuring that real leaves (even with unfamiliar diseases or discoloration) are never falsely rejected.
+    """
 
     def __init__(self):
         self.device = torch.device("cpu")
@@ -87,42 +79,38 @@ class LeafDetector:
             logger.warning(f"Could not initialize MobileNetV3 detector: {e}")
             self._model = None
 
-    def _check_central_roi_botanical(self, img_np: np.ndarray) -> Tuple[bool, float, str]:
+    def _analyze_botanical_tissue(self, img_np: np.ndarray) -> Tuple[bool, float, str]:
+        """Examines the entire image for plant tissue (green foliage, chlorosis, necrosis, venation)."""
         h, w = img_np.shape[:2]
-        # Central 50% bounding box
-        y1, y2 = int(h * 0.25), int(h * 0.75)
-        x1, x2 = int(w * 0.25), int(w * 0.75)
-        center_roi = img_np[y1:y2, x1:x2]
+        total_pixels = h * w
 
-        hsv_center = cv2.cvtColor(center_roi, cv2.COLOR_RGB2HSV)
+        hsv = cv2.cvtColor(img_np, cv2.COLOR_RGB2HSV)
 
-        # Green vegetation mask: Hue 18 to 85, Saturation > 25, Value > 25
-        green_mask = cv2.inRange(hsv_center, (18, 25, 25), (85, 255, 255))
-        # Necrotic/yellow-brown lesion mask: Hue 8 to 25, Saturation > 35
-        lesion_mask = cv2.inRange(hsv_center, (8, 35, 25), (25, 255, 220))
-        
-        leaf_mask_center = (green_mask > 0) | (lesion_mask > 0)
-        center_leaf_ratio = float(np.count_nonzero(leaf_mask_center) / (center_roi.shape[0] * center_roi.shape[1]))
+        # 1. Healthy green spectrum: Hue 20 to 88, Saturation > 20, Value > 20
+        green_mask = cv2.inRange(hsv, (18, 20, 20), (88, 255, 255))
 
-        # Color balance checks
-        r = center_roi[:, :, 0].astype(np.float32)
-        g = center_roi[:, :, 1].astype(np.float32)
-        b = center_roi[:, :, 2].astype(np.float32)
+        # 2. Chlorotic yellow / lesion spectrum: Hue 8 to 25, Saturation > 30, Value > 20
+        chlorotic_mask = cv2.inRange(hsv, (8, 30, 20), (25, 255, 255))
 
-        exb = b - (r + g) / 2.0
+        # 3. Brown / necrotic tissue on leaf
+        brown_mask = cv2.inRange(hsv, (5, 25, 15), (22, 255, 200))
+
+        leaf_mask = (green_mask > 0) | (chlorotic_mask > 0) | (brown_mask > 0)
+        leaf_pixels = np.count_nonzero(leaf_mask)
+        leaf_ratio = float(leaf_pixels / total_pixels)
+
+        # Excess Green Index: 2G - R - B
+        r = img_np[:, :, 0].astype(np.float32)
+        g = img_np[:, :, 1].astype(np.float32)
+        b = img_np[:, :, 2].astype(np.float32)
         exg = 2.0 * g - r - b
-
         mean_exg = float(np.mean(exg))
-        mean_exb = float(np.mean(exb))
 
-        # Reject dominant metallic blue or non-vegetative surfaces
-        if mean_exb > 15.0 or (center_leaf_ratio < 0.18 and mean_exg < 5.0):
-            return False, center_leaf_ratio, "center_roi_not_vegetation"
+        # If significant leaf tissue is present anywhere in the frame
+        if leaf_ratio >= 0.05 or (leaf_pixels > 2500 and mean_exg > -10.0):
+            return True, leaf_ratio, "leaf_tissue_confirmed"
 
-        if center_leaf_ratio < 0.12:
-            return False, center_leaf_ratio, "insufficient_central_leaf_tissue"
-
-        return True, center_leaf_ratio, "valid_central_leaf"
+        return False, leaf_ratio, "no_botanical_tissue_detected"
 
     def detect_leaf(self, image_path: str) -> LeafDetectionResult:
         try:
@@ -135,50 +123,48 @@ class LeafDetector:
                 reason="corrupted_or_unreadable",
             )
 
-        # 1. Semantic ImageNet Category Filter
-        detected_subject = "unknown"
+        # 1. Check botanical tissue across image
+        is_botanical, leaf_ratio, reason = self._analyze_botanical_tissue(img_np)
+
+        # 2. Semantic ImageNet Category Filter for non-plant rejection
         if self._model is not None and self._transform is not None:
             try:
                 tensor = self._transform(pil_img).unsqueeze(0).to(self.device)
                 with torch.no_grad():
                     logits = self._model(tensor)
                     probs = torch.softmax(logits, dim=1)[0]
-                    top_probs, top_indices = torch.topk(probs, 5)
+                    top_prob, top_idx = torch.topk(probs, 1)
 
-                top_category = self._categories[top_indices[0].item()].lower()
-                top_prob = top_probs[0].item()
-                detected_subject = f"{top_category} ({top_prob*100:.1f}%)"
+                top_category = self._categories[top_idx[0].item()].lower()
+                top_prob_val = top_prob[0].item()
 
-                for p, idx in zip(top_probs, top_indices):
-                    cat_name = self._categories[idx.item()].lower()
-                    prob_val = p.item()
-                    is_non_plant = any(kw in cat_name for kw in NON_PLANT_KEYWORDS)
+                is_definite_non_plant = any(kw in top_category for kw in HIGH_CONFIDENCE_NON_PLANT)
 
-                    if is_non_plant and prob_val > 0.15:
-                        logger.info(f"Non-leaf object identified: {cat_name} ({prob_val*100:.1f}%)")
-                        return LeafDetectionResult(
-                            leaf_detected=False,
-                            confidence=prob_val,
-                            reason="no_supported_leaf_detected",
-                            detected_category=cat_name,
-                        )
+                # If the image strongly matches a non-plant class (e.g. car, dog, airplane) AND lacks leaf tissue
+                if is_definite_non_plant and top_prob_val > 0.40 and leaf_ratio < 0.15:
+                    logger.info(f"Non-leaf object identified: {top_category} ({top_prob_val*100:.1f}%)")
+                    return LeafDetectionResult(
+                        leaf_detected=False,
+                        confidence=top_prob_val,
+                        reason="no_supported_leaf_detected",
+                        detected_category=top_category,
+                    )
             except Exception as e:
                 logger.warning(f"Semantic filter check skipped: {e}")
 
-        # 2. Central Botanical ROI Analysis
-        is_botanical, leaf_ratio, roi_reason = self._check_central_roi_botanical(img_np)
-        if not is_botanical:
-            logger.info(f"Failed botanical ROI check: {roi_reason} (ratio: {leaf_ratio:.2f})")
+        # If botanical tissue is found or not an overt non-plant
+        if is_botanical:
             return LeafDetectionResult(
-                leaf_detected=False,
-                confidence=float(1.0 - leaf_ratio),
-                reason="no_supported_leaf_detected",
-                detected_category=detected_subject,
+                leaf_detected=True,
+                confidence=max(0.85, float(leaf_ratio)),
+                reason=None,
+                detected_category="plant_leaf",
             )
 
+        # If neither botanical tissue nor recognized object
         return LeafDetectionResult(
-            leaf_detected=True,
-            confidence=max(0.85, float(leaf_ratio)),
-            reason=None,
-            detected_category="plant_leaf",
+            leaf_detected=False,
+            confidence=0.0,
+            reason="no_supported_leaf_detected",
+            detected_category="unrecognized_non_leaf",
         )
